@@ -1,16 +1,13 @@
-## Hi there 👋
+# Nation Building Services
 
-<!--
-**NanihOba/NanihOba** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+This repository contains the source for a simple informational website that outlines consulting services for building and developing a nation. The page includes details about our mission, available services, an example of our founder's own nation-building project, tiered pricing with plan details, a new section explaining the department kits that come with each plan, a consultation call link, a short curriculum, and a media section where you can play, upload, and download example videos.
 
-Here are some ideas to get you started:
+Open `website/index.html` in your browser to view the page locally.
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+## Deploying to GitHub Pages
+
+1. Create a repository on GitHub and push this code to the `main` branch.
+2. The included workflow in `.github/workflows/github-pages.yml` will build and
+   publish the `website` folder automatically.
+3. In your repository settings, enable GitHub Pages and choose the `GitHub
+   Actions` source. Your site will be available at the URL provided by GitHub.
