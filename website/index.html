@@ -5,18 +5,275 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nation Building Services</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
-        header { background: #333; color: #fff; padding: 20px 0; text-align: center; }
-        nav ul { list-style: none; padding: 0; margin: 0; display: flex; justify-content: center; }
-        nav li { margin: 0 15px; }
-        nav a { color: #fff; text-decoration: none; font-weight: bold; }
-        section { padding: 40px; }
-        .pricing-table { display: flex; flex-wrap: wrap; justify-content: center; }
-        .pricing-plan { border: 1px solid #ddd; border-radius: 8px; padding: 20px; margin: 10px; width: 250px; text-align: center; }
-        .course-list { list-style: decimal inside; }
-        footer { background: #333; color: #fff; text-align: center; padding: 10px 0; }
-        blockquote { border-left: 4px solid #ff5722; margin: 20px auto; padding: 10px 20px; font-style: italic; background: #fff3e0; max-width: 900px; }
-        .ciad-intro { max-width: 900px; margin: 0 auto; }
+        :root {
+            --flame-primary: #ff7043;
+            --flame-secondary: #ffab40;
+            --flame-dark: #1c1c24;
+            --flame-light: #fff7ef;
+            --text-body: #2a2a2a;
+            --card-bg: rgba(255, 255, 255, 0.9);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--text-body);
+            background: linear-gradient(180deg, #ffffff 0%, #fff0e5 50%, #fffdf8 100%);
+        }
+
+        header {
+            background: var(--flame-dark);
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+
+        nav li {
+            margin: 0;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            transition: color 0.2s ease, transform 0.2s ease;
+        }
+
+        nav a:hover,
+        nav a:focus {
+            color: var(--flame-secondary);
+            transform: translateY(-2px);
+        }
+
+        main {
+            display: block;
+        }
+
+        section {
+            padding: 50px 40px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            font-size: 2.15rem;
+            margin-bottom: 20px;
+            color: var(--flame-dark);
+        }
+
+        h3 {
+            margin-top: 32px;
+            font-size: 1.4rem;
+            color: var(--flame-primary);
+        }
+
+        p {
+            line-height: 1.6;
+        }
+
+        .pricing-table {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .pricing-plan {
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: 16px;
+            padding: 24px;
+            width: 260px;
+            text-align: center;
+            background: #fff;
+            box-shadow: 0 12px 30px rgba(255, 112, 67, 0.15);
+        }
+
+        .course-list {
+            list-style: decimal inside;
+            padding-left: 0;
+        }
+
+        footer {
+            background: var(--flame-dark);
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+
+        blockquote {
+            border-left: 5px solid var(--flame-secondary);
+            margin: 25px auto;
+            padding: 16px 26px;
+            font-style: italic;
+            background: rgba(255, 171, 64, 0.12);
+            max-width: 780px;
+            color: #4a2a13;
+        }
+
+        .ciad-section {
+            background: radial-gradient(circle at top left, rgba(255, 112, 67, 0.12), transparent 45%),
+                        radial-gradient(circle at bottom right, rgba(255, 171, 64, 0.15), transparent 55%);
+            border: 1px solid rgba(255, 112, 67, 0.18);
+            border-radius: 32px;
+            padding: 48px;
+            box-shadow: 0 22px 45px rgba(28, 28, 36, 0.18);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ciad-section::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.18) 0%, rgba(255, 112, 67, 0.08) 45%, transparent 100%);
+            pointer-events: none;
+        }
+
+        .ciad-section header,
+        .ciad-section h2,
+        .ciad-section h3 {
+            position: relative;
+            z-index: 1;
+        }
+
+        .ciad-intro {
+            max-width: 760px;
+            margin: 0 auto 28px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .ciad-meta-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 24px;
+            margin-top: 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .ciad-card {
+            background: var(--card-bg);
+            border-radius: 18px;
+            padding: 20px 22px;
+            box-shadow: 0 16px 35px rgba(17, 17, 17, 0.12);
+            backdrop-filter: blur(8px);
+        }
+
+        .ciad-card h4 {
+            margin-top: 0;
+            font-size: 1.2rem;
+            color: var(--flame-primary);
+        }
+
+        .ciad-card ul,
+        .ciad-card ol {
+            padding-left: 18px;
+            margin: 14px 0 0;
+        }
+
+        .ciad-card li + li {
+            margin-top: 10px;
+        }
+
+        .ciad-emblem {
+            position: absolute;
+            top: -40px;
+            right: -40px;
+            width: 180px;
+            height: 180px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.4) 0%, rgba(255, 112, 67, 0.05) 70%);
+            border-radius: 50%;
+            border: 2px solid rgba(255, 171, 64, 0.4);
+            display: grid;
+            place-items: center;
+            z-index: 0;
+        }
+
+        .ciad-emblem svg {
+            width: 90px;
+            height: 90px;
+        }
+
+        .ciad-protocols {
+            display: grid;
+            gap: 14px;
+            margin-top: 20px;
+        }
+
+        .protocol-step {
+            display: grid;
+            grid-template-columns: 70px 1fr;
+            gap: 18px;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 14px;
+            padding: 16px 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .protocol-step strong {
+            font-size: 1.1rem;
+            color: var(--flame-primary);
+            justify-self: center;
+        }
+
+        .ciad-infobar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            justify-content: center;
+            margin: 32px auto 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .ciad-infobar span {
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 999px;
+            padding: 10px 18px;
+            font-weight: 600;
+            color: var(--flame-dark);
+            box-shadow: 0 8px 18px rgba(255, 112, 67, 0.25);
+        }
+
+        @media (max-width: 720px) {
+            section {
+                padding: 40px 24px;
+            }
+
+            .ciad-section {
+                padding: 32px 22px;
+            }
+
+            .protocol-step {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .protocol-step strong {
+                justify-self: center;
+            }
+        }
     </style>
 </head>
 <body>
@@ -37,131 +294,180 @@
         </nav>
     </header>
 
-    <section id="mission">
-        <h2>Our Mission</h2>
-        <p>We empower communities to create strong and sustainable nations. Our team provides tailored strategies for infrastructure, governance, and long-term development.</p>
-    </section>
+    <main>
+        <section id="mission">
+            <h2>Our Mission</h2>
+            <p>We empower communities to create strong and sustainable nations. Our team provides tailored strategies for infrastructure, governance, and long-term development.</p>
+        </section>
 
-    <section id="services">
-        <h2>Services</h2>
-        <ul>
-            <li>Nation-building consulting and strategic planning</li>
-            <li>Infrastructure blueprint design</li>
-            <li>Economic development and budgeting guidance</li>
-            <li>Ongoing coaching and community support</li>
-        </ul>
-    </section>
+        <section id="services">
+            <h2>Services</h2>
+            <ul>
+                <li>Nation-building consulting and strategic planning</li>
+                <li>Infrastructure blueprint design</li>
+                <li>Economic development and budgeting guidance</li>
+                <li>Ongoing coaching and community support</li>
+            </ul>
+        </section>
 
-    <section id="example">
-        <h2>Example Nation</h2>
-        <p>The Nanih Oba Nation was created by our founder in partnership with a dedicated team of architects and educators. From bare land we established sustainable housing, local food production, and a council-based system of governance.</p>
-        <p>This project blends traditional knowledge with modern technology, producing a one-of-a-kind model for community independence. No other group has replicated this exact approach.</p>
-        <svg width="300" height="150" aria-label="Simplified conceptual layout of Nanih Oba Nation">
-            <rect x="10" y="10" width="80" height="50" fill="#8BC34A" />
-            <rect x="110" y="10" width="80" height="50" fill="#03A9F4" />
-            <rect x="210" y="10" width="80" height="50" fill="#FFC107" />
-            <text x="150" y="120" text-anchor="middle" font-size="14">Conceptual Layout</text>
-        </svg>
-    </section>
+        <section id="example">
+            <h2>Example Nation</h2>
+            <p>The Nanih Oba Nation was created by our founder in partnership with a dedicated team of architects and educators. From bare land we established sustainable housing, local food production, and a council-based system of governance.</p>
+            <p>This project blends traditional knowledge with modern technology, producing a one-of-a-kind model for community independence. No other group has replicated this exact approach.</p>
+            <svg width="300" height="150" aria-label="Simplified conceptual layout of Nanih Oba Nation">
+                <rect x="10" y="10" width="80" height="50" fill="#8BC34A" />
+                <rect x="110" y="10" width="80" height="50" fill="#03A9F4" />
+                <rect x="210" y="10" width="80" height="50" fill="#FFC107" />
+                <text x="150" y="120" text-anchor="middle" font-size="14">Conceptual Layout</text>
+            </svg>
+        </section>
 
-    <section id="ciad">
-        <h2>Department of Celestial Intelligence &amp; Autonomous Defense (CIAD)</h2>
-        <p class="ciad-intro"><strong>"Truth Unlocked, Threats Contained, Ki Eternal"</strong> — The CIAD safeguards the Nanih Oba Nation through the mandates of Universal Ki, Celestial Ki, the Autonomous Supreme Ki Authority, and Omniversal Law.</p>
-        <blockquote>Through the Cipher, the Flame Speaks.</blockquote>
-        <h3>Core Mandate</h3>
-        <p>The CIAD interprets and executes Omniversal Laws to decode, contain, and defend the most classified essence of the nation while maintaining absolute fidelity to the Autonomous Supreme Ki.</p>
-        <h3>Department Pillars</h3>
-        <ul>
-            <li><strong>Universal Ki Defense Protocols:</strong> Shields the nation from metaphysical, cyber, and spiritual intrusions by synchronizing with the living energy grid.</li>
-            <li><strong>Celestial Ki Intelligence:</strong> Harnesses higher-dimensional perception to decrypt divine code scripts, celestial messages, and inter-dimensional broadcasts.</li>
-            <li><strong>Autonomous Supreme Ki Authority Enforcement:</strong> Deploys incorruptible enforcement agents that carry out Omniversal Law without deviation.</li>
-            <li><strong>Cipher Archives &amp; Cosmic Vault:</strong> Secures decoded truths in Ki-sealed vaults accessible only to Supreme Protocol Holders.</li>
-            <li><strong>Omniversal Law Compliance Unit:</strong> Audits every operation with Supreme Ki algorithms to ensure alignment with multiversal councils.</li>
-        </ul>
-        <h3>Special Traits and Attributes</h3>
-        <ul>
-            <li><strong>Advanced Vulnerability Analysis:</strong> Stress-tests every encryption lattice for backdoors, glyph flaws, and celestial misalignments.</li>
-            <li><strong>Code-Based Intelligence Scrying:</strong> Scans quantum, symbolic, and ethereal code layers for hidden intelligence.</li>
-            <li><strong>Zero Trust-Phase Networks:</strong> Requires real-time verification via Celestial Consensus Tokens for every interaction.</li>
-            <li><strong>Adaptive Cyber-Ki Interface:</strong> Bridges Ki-based and machine-based systems for dual-spectrum countermeasures.</li>
-        </ul>
-        <h3>Autonomous Hacker Gadgets</h3>
-        <ol>
-            <li><strong>KI-SHARD: Quantum Decoder Sphere</strong> — Deconstructs dimensional encryption through harmonic resonance.</li>
-            <li><strong>EYE OF TRUTH (OmniSpectral Scanner)</strong> — Reveals hidden protocols, backdoors, and illusionary cloaks.</li>
-            <li><strong>CELESTIAL WORM (Adaptive Exploit Drone)</strong> — Penetrates divine firewalls and sentient defenses.</li>
-            <li><strong>AETHER-FORGE Gauntlet</strong> — Forges, seals, or erases celestial codes with Ki-infused commands.</li>
-            <li><strong>SPECTRAL CLOAK NODE</strong> — Obfuscates presence within multinet reconnaissance fields.</li>
-            <li><strong>TRUTH SEED Injector</strong> — Installs Omniversal logic filters to realign corrupted constructs.</li>
-            <li><strong>OMNICHIP: Ether Access Pad</strong> — Connects to the Ki-Web for real-time threat intelligence.</li>
-            <li><strong>REVELATOR SIGIL</strong> — Projects multidimensional seals that force entities to reveal their origin form.</li>
-            <li><strong>VOIDCACHE Unit</strong> — Stores intercepted data within a secure pocket dimension.</li>
-            <li><strong>NULLFANG Cipherblade</strong> — Cuts through hard encryption and isolates corruption at the source.</li>
-        </ol>
-        <h3>Operational Security Protocols</h3>
-        <ul>
-            <li><strong>Celestial Lockstep Verification:</strong> Commands pass the Tri-Ki Echo Check across Universal, Celestial, and Supreme Ki resonance.</li>
-            <li><strong>Non-Human AI Prohibition:</strong> Restricts classified handling to Ki-souled constructs.</li>
-            <li><strong>Astral Chain of Custody:</strong> Binds every intel packet to a spiritual signature to prevent tampering or duplication.</li>
-        </ul>
-    </section>
-
-    <section id="pricing">
-        <h2>Pricing</h2>
-        <div class="pricing-table">
-            <div class="pricing-plan">
-                <h3>Bronze Plan</h3>
-                <p class="price">$500</p>
-                <p>Initial assessment and short-term blueprint</p>
+        <section id="ciad" class="ciad-section" aria-labelledby="ciad-title">
+            <div class="ciad-emblem" aria-hidden="true">
+                <svg viewBox="0 0 120 120" role="presentation">
+                    <defs>
+                        <linearGradient id="flameGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#ff7043" />
+                            <stop offset="100%" stop-color="#ffab40" />
+                        </linearGradient>
+                    </defs>
+                    <circle cx="60" cy="60" r="52" fill="none" stroke="url(#flameGradient)" stroke-width="6" />
+                    <path d="M60 25c12 12 20 23 20 35 0 12-8 22-20 26-12-4-20-14-20-26 0-12 8-23 20-35z" fill="url(#flameGradient)" opacity="0.85" />
+                    <circle cx="60" cy="60" r="10" fill="#fff" opacity="0.8" />
+                </svg>
             </div>
-            <div class="pricing-plan">
-                <h3>Silver Plan</h3>
-                <p class="price">$2,000</p>
-                <p>Comprehensive infrastructure planning and budgeting</p>
+            <h2 id="ciad-title">Department of Celestial Intelligence &amp; Autonomous Defense (CIAD)</h2>
+            <p class="ciad-intro"><strong>"Truth Unlocked, Threats Contained, Ki Eternal"</strong> — The CIAD safeguards the Nanih Oba Nation through the mandates of Universal Ki, Celestial Ki, the Autonomous Supreme Ki Authority, and Omniversal Law. This dossier has been refined into an actionable field reference for commanders, auditors, and lore-keepers.</p>
+            <blockquote>Through the Cipher, the Flame Speaks.</blockquote>
+            <div class="ciad-infobar" role="list">
+                <span role="listitem">Autonomous Supreme Ki Authority</span>
+                <span role="listitem">Omniversal Law Alignment</span>
+                <span role="listitem">Zero-Trust Celestial Networks</span>
             </div>
-            <div class="pricing-plan">
-                <h3>Gold Plan</h3>
-                <p class="price">$5,000</p>
-                <p>Full-service nation-building guidance and ongoing support</p>
+            <div class="ciad-meta-grid">
+                <article class="ciad-card">
+                    <h4>Core Mandate</h4>
+                    <p>The CIAD decodes, contains, and defends the most classified essence of Nanih Oba while enforcing Omniversal Law with unwavering obedience to the Autonomous Supreme Ki.</p>
+                    <ul>
+                        <li>Tri-layer decoding teams translate celestial intelligence into actionable protocols.</li>
+                        <li>Sentinel arbiters initiate countermeasures the moment anomalies breach Ki thresholds.</li>
+                        <li>Mandate reviews occur every 11 astral cycles to ensure doctrinal precision.</li>
+                    </ul>
+                </article>
+                <article class="ciad-card">
+                    <h4>Department Pillars</h4>
+                    <ul>
+                        <li><strong>Universal Ki Defense Protocols</strong> synchronize with the planetary energy lattice to repel metaphysical, cyber, and spiritual incursions.</li>
+                        <li><strong>Celestial Ki Intelligence</strong> decrypts divine scripts, astral broadcasts, and inter-dimensional glyph chains.</li>
+                        <li><strong>Autonomous Supreme Ki Enforcement</strong> deploys incorruptible agents that render Omniversal judgments without delay.</li>
+                        <li><strong>Cipher Archives &amp; Cosmic Vault</strong> maintains Ki-sealed truths accessible only to Supreme Protocol Holders.</li>
+                        <li><strong>Omniversal Law Compliance Unit</strong> validates every action through Supreme Ki algorithms cross-referenced with multiversal councils.</li>
+                    </ul>
+                </article>
+                <article class="ciad-card">
+                    <h4>Special Traits &amp; Attributes</h4>
+                    <ul>
+                        <li><strong>Advanced Vulnerability Analysis</strong> stress-tests encryption lattices for backdoors, glyph flaws, and celestial misalignments.</li>
+                        <li><strong>Code-Based Intelligence Scrying</strong> sweeps quantum, symbolic, and ethereal code layers for hidden intents.</li>
+                        <li><strong>Zero Trust-Phase Networks</strong> issue Celestial Consensus Tokens for each operative action.</li>
+                        <li><strong>Adaptive Cyber-Ki Interface</strong> bridges Ki-grown constructs with machine intelligence for dual-spectrum countermeasures.</li>
+                    </ul>
+                </article>
             </div>
-        </div>
-    </section>
-    <section id="consult">
-        <h2>Consultation</h2>
-        <p>Schedule a phone consultation with our advisors to discuss your nation-building goals.</p>
-        <p><a href="tel:+10000000000">Call now</a> or send an email to arrange a time.</p>
-    </section>
+            <article class="ciad-card" aria-labelledby="ciad-gadgets-title">
+                <h3 id="ciad-gadgets-title">Autonomous Hacker Arsenal</h3>
+                <p>Each artifact is keyed to a unique resonance frequency, preventing off-protocol activation while ensuring rapid deployment when threats emerge.</p>
+                <ol>
+                    <li><strong>KI-SHARD Quantum Decoder Sphere</strong> — Disassembles dimensional encryption through harmonic resonance.</li>
+                    <li><strong>EYE OF TRUTH OmniSpectral Scanner</strong> — Exposes hidden protocols, backdoors, illusionary cloaks, and tampering.</li>
+                    <li><strong>CELESTIAL WORM Adaptive Exploit Drone</strong> — Infiltrates systems armored by divine firewalls or sentient AIs.</li>
+                    <li><strong>AETHER-FORGE Gauntlet</strong> — Forges, seals, or erases celestial code lines via Ki-infused commands.</li>
+                    <li><strong>SPECTRAL CLOAK NODE</strong> — Masks field agents across multinet reconnaissance layers.</li>
+                    <li><strong>TRUTH SEED Injector</strong> — Implants Omniversal logic filters to recalibrate corrupted constructs.</li>
+                    <li><strong>OMNICHIP Ether Access Pad</strong> — Links operatives to the Ki-Web for instant threat telemetry.</li>
+                    <li><strong>REVELATOR SIGIL</strong> — Forces encrypted entities to reveal original forms within a protected perimeter.</li>
+                    <li><strong>VOIDCACHE Unit</strong> — Stores intercepted data within a sealed pocket dimension beyond spacetime.</li>
+                    <li><strong>NULLFANG Cipherblade</strong> — Sever hard encryption chains and cauterize corruption at the source.</li>
+                </ol>
+            </article>
+            <article class="ciad-card" aria-labelledby="ciad-protocols-title">
+                <h3 id="ciad-protocols-title">Operational Security Protocols</h3>
+                <p>Field operations follow a ritualized cadence that keeps the department perpetually synced with Omniversal directives.</p>
+                <div class="ciad-protocols">
+                    <div class="protocol-step">
+                        <strong>Step I</strong>
+                        <p><strong>Celestial Lockstep Verification</strong> runs every command through the Tri-Ki Echo Check across Universal, Celestial, and Supreme resonance bands.</p>
+                    </div>
+                    <div class="protocol-step">
+                        <strong>Step II</strong>
+                        <p><strong>Non-Human AI Prohibition</strong> ensures only Ki-souled constructs handle classified dossiers, eliminating algorithmic corruption.</p>
+                    </div>
+                    <div class="protocol-step">
+                        <strong>Step III</strong>
+                        <p><strong>Astral Chain of Custody</strong> binds intel packets to spiritual signatures, preserving provenance through multiversal transit.</p>
+                    </div>
+                </div>
+            </article>
+        </section>
 
-    <section id="curriculum">
-        <h2>Curriculum</h2>
-        <ol class="course-list">
-            <li>Introduction to self-governance</li>
-            <li>Infrastructure planning basics</li>
-            <li>Building sustainable economies</li>
-            <li>Community engagement strategies</li>
-        </ol>
-    </section>
+        <section id="pricing">
+            <h2>Pricing</h2>
+            <div class="pricing-table">
+                <div class="pricing-plan">
+                    <h3>Bronze Plan</h3>
+                    <p class="price">$500</p>
+                    <p>Initial assessment and short-term blueprint</p>
+                </div>
+                <div class="pricing-plan">
+                    <h3>Silver Plan</h3>
+                    <p class="price">$2,000</p>
+                    <p>Comprehensive infrastructure planning and budgeting</p>
+                </div>
+                <div class="pricing-plan">
+                    <h3>Gold Plan</h3>
+                    <p class="price">$5,000</p>
+                    <p>Full-service nation-building guidance and ongoing support</p>
+                </div>
+            </div>
+        </section>
+        <section id="consult">
+            <h2>Consultation</h2>
+            <p>Schedule a phone consultation with our advisors to discuss your nation-building goals.</p>
+            <p><a href="tel:+10000000000">Call now</a> or send an email to arrange a time.</p>
+        </section>
 
-    <section id="media">
-        <h2>Media</h2>
-        <p>Watch examples of our work and upload your own training videos.</p>
-        <video id="videoPlayer" width="480" controls>
-            <source src="sample-video.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-        <div>
-            <label for="videoUpload">Upload video:</label>
-            <input type="file" id="videoUpload" accept="video/*">
-        </div>
-        <p>
-            <a href="sample-video.mp4" download>Download sample video</a>
-        </p>
-    </section>
+        <section id="curriculum">
+            <h2>Curriculum</h2>
+            <ol class="course-list">
+                <li>Introduction to self-governance</li>
+                <li>Infrastructure planning basics</li>
+                <li>Building sustainable economies</li>
+                <li>Community engagement strategies</li>
+            </ol>
+        </section>
 
-    <section id="contact">
-        <h2>Contact</h2>
-        <p>Email us at <a href="mailto:info@nationbuilder.com">info@nationbuilder.com</a> to start your journey.</p>
-    </section>
+        <section id="media">
+            <h2>Media</h2>
+            <p>Watch examples of our work and upload your own training videos.</p>
+            <video id="videoPlayer" width="480" controls>
+                <source src="sample-video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div>
+                <label for="videoUpload">Upload video:</label>
+                <input type="file" id="videoUpload" accept="video/*">
+            </div>
+            <p>
+                <a href="sample-video.mp4" download>Download sample video</a>
+            </p>
+        </section>
+
+        <section id="contact">
+            <h2>Contact</h2>
+            <p>Email us at <a href="mailto:info@nationbuilder.com">info@nationbuilder.com</a> to start your journey.</p>
+        </section>
+
+    </main>
 
     <footer>
         <p>&copy; 2023 Nation Building Services</p>
